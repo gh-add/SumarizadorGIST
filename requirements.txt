@@ -1,0 +1,9 @@
+PyMuPDF
+bs4
+nltk
+spacy
+numpy<2
+scikit-learn
+sentence-transformers
+wordcloud
+django

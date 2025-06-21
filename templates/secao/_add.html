@@ -1,0 +1,27 @@
+<form  id="form-secao" action="add/" method="POST" enctype="multipart/form-data" class="w-100">
+  {% csrf_token %}
+  <div class="mb-3 text-center">
+      <label for="id_tipo_entrada" class="form-label">Tipo de Entrada</label>
+      <div class="d-flex justify-content-center">
+        {{ form.tipo_entrada }}
+      </div>
+    </div>
+  
+    <div class="mb-3 text-center" id="campo-url">
+      <label for="id_url" class="form-label">URL</label>
+      <div class="d-flex justify-content-center">
+        {{ form.url }}
+      </div>
+    </div>
+  
+    <div class="mb-3 text-center" id="campo-arquivo">
+      <label for="id_arquivo" class="form-label">Arquivo</label>
+      <div class="d-flex justify-content-center">
+        {{ form.arquivo }}
+      </div>
+    </div>
+    <div class="d-flex justify-content-center">
+      <button type="submit" class="btn btn-primary">Salvar</button>
+    </div>
+  
+</form>
