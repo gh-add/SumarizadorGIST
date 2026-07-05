@@ -7,9 +7,10 @@ class Secao(models.Model):
     ]
 
     nome = models.CharField(max_length=100)
-    texto_resposta = models.TextField(blank=True)
+    resumo = models.TextField(blank=True)
     tipo_entrada = models.CharField(max_length=10, choices=TIPO_ENTRADA_CHOICES)
     url = models.URLField(blank=True, null=True) 
     arquivo = models.FileField(upload_to='uploads/', blank=True, null=True)  
     imagem_nuvem = models.CharField(max_length=255, blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 

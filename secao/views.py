@@ -1,50 +1,36 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse, HttpResponseBadRequest
 from django.template.loader import render_to_string
-from django.http import  HttpResponseRedirect
+from django.http import  HttpResponseRedirect, HttpResponse
 from .models import Secao as Secao
 from .forms import SecaoForm
 
 # Create your views here.
-def home(request):
-    secoes = Secao.objects.all().order_by('-id')
-    form = SecaoForm()
-    context = {
-        'secoes': secoes,
-        'form': form,
-    }
-    return render(request, "secao/index.html", context)
-
+# view para adicionar uma nova seção de resumo Gist Summ
 def add(request):
     if request.method == 'POST':
         form = SecaoForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('home')  
-        else:
-            return render(request, "secao/_add.html", {'form': form})  
-
+            return render(request, "secao/detail.html", {'secao': form.instance})
     else:
         form = SecaoForm()
-        html = render_to_string("secao/_add.html", {'form': form}, request=request)
-        return JsonResponse({'success': True, 'html': html})
+        return render(request, "secao/add.html", {'form': form})
 
-
+# ajax view para listar todas as seções de resumo Gist Summ
 def listar_secoes(request):
+    print("Listando seções...")
     secoes = Secao.objects.all().order_by('-id')
-    html = render_to_string("_nav.html", {'secoes': secoes}, request=request)
-    return JsonResponse({'html': html})
+    html = render_to_string("secao/partials/list.html", {'secoes': secoes}, request=request)
+    return HttpResponse(html)
 
-
+# view para detalhar uma seção de resumo Gist Summ
 def detalhe_secao(request, pk):
-    if not request.headers.get('x-requested-with') == 'XMLHttpRequest':
-        return HttpResponseBadRequest("Requisição inválida")
     secao = get_object_or_404(Secao, pk=pk)
-    html = render_to_string("secao/_detail.html", {'secao': secao}, request=request)
-    return JsonResponse({'html': html})
+    return render(request, "secao/detail.html", {'secao': secao})
 
-
+# view para deletar uma seção de resumo Gist Summ
 def delete(request, pk):
-    Secao.objects.get(pk=pk).delete()
-    return redirect('home')
+    get_object_or_404(Secao, pk=pk).delete()
+    return HttpResponse(status=204)
 

@@ -1,0 +1,23 @@
+#secao_list {
+  scrollbar-width: thin;                     /* Firefox: barra fina */
+  scrollbar-color: #ced4da transparent;      /* Firefox: cor do thumb e do track */
+}
+
+/* Chrome, Edge, Safari (WebKit) */
+#secao_list::-webkit-scrollbar {
+  width: 6px;
+}
+
+#secao_list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#secao_list::-webkit-scrollbar-thumb {
+  background-color: #ced4da;
+  border-radius: 10px;
+  transition: background-color 0.2s ease;
+}
+
+#secao_list::-webkit-scrollbar-thumb:hover {
+  background-color: #adb5bd;
+}

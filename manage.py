@@ -6,7 +6,7 @@ import sys
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "sumarizacao_GIST.settings")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "sumarizador_gist.settings")
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "sumarizacao_GIST.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "sumarizador_gist.settings")
 
 application = get_wsgi_application()

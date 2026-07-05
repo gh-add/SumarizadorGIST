@@ -37,8 +37,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "secao.apps.SecaoConfig"
-
+    "secao.apps.SecaoConfig",
+    "algoritmo"
 ]
 
 MIDDLEWARE = [
@@ -51,7 +51,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "sumarizacao_GIST.urls"
+ROOT_URLCONF = "sumarizador_gist.urls"
 
 TEMPLATES = [
     {
@@ -69,7 +69,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "sumarizacao_GIST.wsgi.application"
+WSGI_APPLICATION = "sumarizador_gist.wsgi.application"
 
 
 # Database
@@ -105,9 +105,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "pt-br"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
 

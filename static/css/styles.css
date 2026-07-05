@@ -10829,6 +10829,7 @@ textarea.form-control-lg {
 }
 
 #sidebar-wrapper {
+  position: fixed;
   min-height: 100vh;
   margin-left: -15rem;
   transition: margin 0.25s ease-out;
@@ -10845,6 +10846,8 @@ textarea.form-control-lg {
 
 #page-content-wrapper {
   min-width: 100vw;
+  overflow-y: auto;
+  height: 100vh;
 }
 
 body.sb-sidenav-toggled #wrapper #sidebar-wrapper {

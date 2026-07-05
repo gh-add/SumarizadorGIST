@@ -1,0 +1,26 @@
+# Banco de dados
+db.sqlite3
+
+# Ambiente virtual
+venv/
+.venv/
+
+# Pasta de medias
+media/*
+!media/.gitkeep
+
+# Python cache
+*__pycache__/
+*.pyc
+*.pyo
+
+# Django
+*.log
+local_settings.py
+
+# IDEs
+.vscode/
+.idea/
+
+# OS
+.DS_Store

@@ -3,9 +3,8 @@ from . import views
 
 
 urlpatterns = [
-    path("", views.home, name="home"),
-    path("add/", views.add, name="add"),  
-    path("<int:pk>/", views.detalhe_secao, name="detalhe_secao"),
-    path("listar_secoes/", views.listar_secoes, name="listar_secoes"),  # ✅ Corrigido
-    path("del/<int:pk>/", views.delete, name="delete"),
+    path("", views.add, name="secao_add"),  
+    path("<int:pk>/", views.detalhe_secao, name="secao_detail"),
+    path("list/", views.listar_secoes, name="secao_list"),
+    path("del/<int:pk>/", views.delete, name="secao_delete"),
 ]
