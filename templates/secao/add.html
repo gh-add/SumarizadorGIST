@@ -2,40 +2,65 @@
 
 {% block content %}
 <div class="d-flex justify-content-center align-items-center" style="min-height: calc(100vh - 100px);">
-  <div class="col-12 col-md-6 col-lg-4">
+  <div class="col-8 col-md-6 col-lg-4">
 
     <form id="form-secao" method="POST" enctype="multipart/form-data" class="w-100">
       {% csrf_token %}
 
       <div class="mb-3 text-center">
         <div class="d-flex justify-content-center">
-          <select name="tipo_entrada" id="id_tipo_entrada" class="form-select form-select-lg mb-3" style="max-width: 500px;">
+          <select name="tipo_entrada" id="id_tipo_entrada" class="form-select form-select-lg mb-3 w-100">
             <option value="url">URL</option>
-            <option value="arquivo">Arquivo</option>
+            <option value="file">Arquivo</option>
           </select>
         </div>
       </div>
 
       <div class="mb-3 text-center" id="campo-url">
-        <label for="id_url" class="form-label">URL</label>
-        <div class="d-flex justify-content-center">
-          <input type="url" name="url" id="id_url" class="form-control form-control-lg mb-3" placeholder="Digite a URL..." style="max-width: 500px;">
-        </div>
-      </div>
+  <div class="d-flex justify-content-center position-relative">
+    <input type="url" name="url" id="id_url" class="form-control form-control-lg  w-100" placeholder="Digite a URL...">
+  </div>
+</div>
 
-      <div class="mb-3 text-center" id="campo-arquivo">
-        <label for="id_arquivo" class="form-label">Arquivo</label>
-        <div class="d-flex justify-content-center">
-          <input type="file" name="arquivo" id="id_arquivo" class="form-control form-control-lg mb-3" style="max-width: 500px;">
-        </div>
-      </div>
+<div class="mb-3 text-center" id="campo-arquivo">
+  <div class="position-relative">
+    <button type="button" class="btn btn-outline-primary text-primary form-control-lg w-100" id="btn-arquivo-visual">
+      <span id="arquivo-nome-label" >Selecionar arquivo...</span>
+    </button>
+    <input type="file" name="arquivo" id="id_arquivo"
+           class="position-absolute top-0 start-0 w-100 h-100"
+           style="opacity: 0; cursor: pointer; z-index: 2;">
+  </div>
+</div>
 
-      <div class="d-flex justify-content-center">
-        <button type="submit" class="btn btn-primary">Salvar</button>
-      </div>
-
+<div class="d-flex justify-content-center">
+  <button type="submit" class="btn btn-primary w-100" id="btn-salvar">
+    <i class="bi bi-file-text me-2" id="btn-salvar-icone"></i>
+    <span id="btn-salvar-texto">Resumir</span>
+    <span id="btn-salvar-spinner" class="spinner-border spinner-border-sm ms-2 d-none" role="status" aria-hidden="true"></span>
+  </button>
+</div>
     </form>
 
   </div>
 </div>
+
+<script>
+  document.getElementById('id_arquivo').addEventListener('change', function () {
+    const label = document.getElementById('arquivo-nome-label');
+    label.textContent = this.files.length ? this.files[0].name : 'Escolher arquivo...';
+  });
+
+  document.getElementById('form-secao').addEventListener('submit', function () {
+    const btn = document.getElementById('btn-salvar');
+  const icone = document.getElementById('btn-salvar-icone');
+  const texto = document.getElementById('btn-salvar-texto');
+  const spinner = document.getElementById('btn-salvar-spinner');
+
+  btn.disabled = true;
+  icone.classList.add('d-none');
+  texto.classList.add('d-none');
+  spinner.classList.remove('d-none');
+  });
+</script>
 {% endblock %}

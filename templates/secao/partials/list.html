@@ -1,6 +1,5 @@
 {% for secao in secoes %}
-<div class="d-flex align-items-center justify-content-between list-group-item  list-group-item-light py-3 px-4 rounded border-0 position-relative m-1"
-     style="background-color: #f8f9fa; transition: background-color 0.2s; margin-bottom: 0.5rem;">
+<div class="d-flex align-items-center justify-content-between list-group-item  list-group-item-action list-group-item-light p-3 rounded border-0 w-100">
 
     <a href="{% url 'secao_detail' secao.id %}"
        class="text-decoration-none text-dark flex-grow-1"
@@ -8,18 +7,18 @@
         {{ secao.nome }}
     </a>
 
-    <button class="btn btn-light ms-0 toggle-menu" style="padding: 0.25rem;">
-        <i class="bi bi-three-dots" style="font-size: 0.9rem;"></i>
+    <button class="btn ms-0 toggle-menu p-1" type="button" aria-label="Opções">
+        <i class="bi bi-three-dots-vertical"></i>
     </button>
 
-    <div class="menu-opcoes position-absolute end-0 mt-5 p-2 bg-white shadow rounded d-none" style="z-index: 1000;">
-        <form action="{% url 'secao_delete' secao.id %}" method="post">
+    <div class="menu-opcoes d-none">
+        <form class="form-excluir" action="{% url 'secao_delete' secao.id %}" method="post">
             {% csrf_token %}
-            <button type="submit" class="btn btn-sm btn-outline-danger">
-                <i class="bi bi-trash"></i>
+            <button type="submit" class="btn btn-sm text-danger w-100 ">
+                <i class="bi bi-trash"></i><span class="ms-1">Excluir</span>
             </button>
         </form>
     </div>
 
-</div> <!-- ESTA DIV ESTAVA FALTANDO -->
+</div>
 {% endfor %}

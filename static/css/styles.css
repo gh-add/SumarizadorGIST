@@ -10825,6 +10825,7 @@ textarea.form-control-lg {
   }
 }
 #wrapper {
+  position: relative;
   overflow-x: hidden;
 }
 
@@ -10845,6 +10846,7 @@ textarea.form-control-lg {
 }
 
 #page-content-wrapper {
+  position: relative;
   min-width: 100vw;
   overflow-y: auto;
   height: 100vh;

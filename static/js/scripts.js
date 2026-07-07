@@ -39,8 +39,10 @@ function inicializarToggleTipoEntrada() {
 
   function atualizarCampos() {
     const tipo = tipoEntradaSelect.value;
+    const isUrl = tipo === "url";
+    
     campoUrl.style.display = (tipo === "url") ? "block" : "none";
-    campoArquivo.style.display = (tipo === "arquivo") ? "block" : "none";
+    campoArquivo.style.display = (tipo === "file") ? "block" : "none";
     // Alterna o required conforme o campo visível
     inputUrl.required = isUrl;
     inputArquivo.required = !isUrl;
@@ -65,11 +67,16 @@ function inicializarMenuOpcoes() {
     const isInsideMenu = e.target.closest(".menu-opcoes");
 
     if (isMenuButton) {
-      fecharTodosMenus();
-
       const container = isMenuButton.closest(".list-group-item");
       const menu = container.querySelector(".menu-opcoes");
-      menu.classList.toggle("d-none");
+      const jaAberto = !menu.classList.contains("d-none");
+
+      fecharTodosMenus();
+
+      if (!jaAberto) {
+        posicionarMenu(isMenuButton, menu);
+        menu.classList.remove("d-none");
+      }
 
       e.stopPropagation();
       return;
@@ -79,6 +86,13 @@ function inicializarMenuOpcoes() {
       fecharTodosMenus();
     }
   });
+}
+
+function posicionarMenu(botao, menu) {
+  const rect = botao.getBoundingClientRect();
+
+  menu.style.left = `${rect.left}px`;
+  menu.style.top = `${rect.bottom + 4}px`;
 }
 
 function fecharTodosMenus() {

@@ -52,7 +52,7 @@ class GistSummService:
                 soup = bs.BeautifulSoup(response.read(), 'html.parser')
                 paragrafos = soup.find_all('p')
                 conteudo = ' '.join([p.get_text() for p in paragrafos])
-                return conteudo
+                return self._limpar_texto(conteudo)
             except Exception as e:
                 logger.exception(f"Erro ao carregar texto da URL {dados}: {e}")
             except HTTPError as e:
@@ -67,11 +67,18 @@ class GistSummService:
                 for page in doc:
                     conteudo += page.get_text()
                 doc.close()
-                return conteudo
+                return self._limpar_texto(conteudo)
             except Exception as e:
                 logger.exception(f"Erro ao carregar texto do arquivo {dados}: {e}")
         else:
             raise ValueError("Tipo de entrada inválido. Use 'url' ou 'file'.")
+        
+    def _limpar_texto(self, texto):
+        texto = re.sub(r'-\n', '', texto) # Junta palavras quebradas por hífen no fim da linha (ex: "desenvolvi-\nmento" -> "desenvolvimento")
+        texto = re.sub(r'(?<!\n)\n(?!\n)', ' ', texto) # Substitui quebras de linha simples (dentro de parágrafo) por espaço
+        texto = re.sub(r'\s{2,}', ' ', texto)  # Remove múltiplos espaços seguidos
+        texto = re.sub(r'\s+([.,;:!?])', r'\1', texto)
+        return texto.strip()
 
     def _preprocessamento(self, sentenca):
         sentenca = sentenca.strip().lower() # Remove espaços e transforma em minúsculas

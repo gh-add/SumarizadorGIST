@@ -1,0 +1,71 @@
+<div class="col-lg-8 mb-4">
+    <div class="card shadow-sm border-0 bg-light">
+        <div class="card-body p-4 p-md-5">
+            {% if secao.tipo_entrada == 'url' %}
+            <span class="badge bg-primary mb-3">URL</span>
+            {% else %}
+            <span class="badge bg-warning mb-3">Arquivo</span>
+            {% endif %}
+
+            <h1 class="fw-bold mb-3">{{ secao.nome }}</h1>
+
+            <div class="text-muted small mb-4">
+                <i class="bi bi-calendar-event"></i>
+                {{ secao.created_at }}
+                <span class="mx-2">•</span>
+                <i class="bi bi-file-earmark-text"></i>
+                Resumo Gist Summ
+            </div>
+
+            <hr>
+
+            <div class="mt-4 mb-2" style="font-size:1.05rem; line-height:1.9; text-align:justify;">
+                {% if secao.status == 'processando' %}
+                {% for i in "12345678901234567890123456789"|make_list %}
+                {% if forloop.last %}
+                <div class="skeleton skeleton-linha" style="width: 60%;"></div>
+                {% else %}
+                <div class="skeleton skeleton-linha" style="width: 100%;"></div>
+                {% endif %}
+                {% endfor %}
+                {% elif secao.status == 'erro' %}
+                <p class="text-danger">Ocorreu um erro ao gerar o resumo.</p>
+                {% else %}
+                {{ secao.resumo|linebreaks }}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-4">
+    <div class="card shadow-sm border-0 mb-4 bg-light">
+        <div class="card-body">
+            <h5 class="fw-bold mb-3">Informações</h5>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item px-0 bg-light">
+                    <strong>Tipo</strong><br>{{ secao.tipo_entrada }}
+                </li>
+                <li class="list-group-item px-0 bg-light">
+                    <strong>Origem</strong><br>
+                    {% if secao.url %}
+                    <a href="{{ secao.url }}" target="_blank">Abrir URL</a>
+                    {% else %}
+                    {{ secao.arquivo.name }}
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card shadow-sm border-0 mb-4 bg-light">
+        <div class="card-body">
+            <h5 class="fw-bold mb-3">Nuvem de Palavras</h5>
+            {% if secao.status == 'processando' %}
+            <div class="skeleton skeleton-imagem"></div>
+            {% else %}
+            <img src="/media/clouds/{{ secao.imagem_nuvem }}" class="w-100 h-100 rounded mt-2" alt="Nuvem de palavras">
+            {% endif %}
+        </div>
+    </div>
+</div>
