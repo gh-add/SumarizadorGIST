@@ -5,8 +5,8 @@
 */
 
 document.addEventListener('DOMContentLoaded', inicializarToggleTipoEntrada);
+document.addEventListener('DOMContentLoaded', inicializarEnvioFormularioSecao); 
 document.addEventListener('DOMContentLoaded', inicializarMenuOpcoes);
-
 
 // =======================================================
 // Sidebar - Start Bootstrap Simple Sidebar
@@ -52,11 +52,33 @@ function inicializarToggleTipoEntrada() {
     } else {
       inputUrl.value = "";       // Se o campo visível é Arquivo, limpa o de URL
     }
-
   }
-
   tipoEntradaSelect.addEventListener("change", atualizarCampos);
   atualizarCampos();
+}
+
+function inicializarEnvioFormularioSecao() {
+  const inputArquivo = document.getElementById('id_arquivo');
+  const formSecao = document.getElementById('form-secao');
+
+  if (!inputArquivo || !formSecao) return;
+
+  inputArquivo.addEventListener('change', function () {
+    const label = document.getElementById('arquivo-nome-label');
+    label.textContent = this.files.length ? this.files[0].name : 'Escolher arquivo...';
+  });
+
+  formSecao.addEventListener('submit', function () {
+    const btn = document.getElementById('btn-salvar');
+    const icone = document.getElementById('btn-salvar-icone');
+    const texto = document.getElementById('btn-salvar-texto');
+    const spinner = document.getElementById('btn-salvar-spinner');
+
+    btn.disabled = true;
+    icone.classList.add('d-none');
+    texto.classList.add('d-none');
+    spinner.classList.remove('d-none');
+  });
 }
 
 
