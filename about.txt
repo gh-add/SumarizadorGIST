@@ -1,0 +1,43 @@
+<h2 id="started">Sobre</h2>
+
+<p align="center">
+    <a href="projeto/img/index.png" target="_blank">
+        <img src="projeto/img/index.png" alt="página Index" width="400px">
+    </a>
+    <a href="projeto/img/detail.png" target="_blank">
+        <img src="projeto/img/detail.png" alt="página de Resumo" width="400px">
+    </a>
+</p>
+
+<p align="justify">
+  A ferramenta SumarizadorGIST foi construída com o objetivo de oferecer uma solução web capaz de gerar resumos de arquivos PDF e URLs utilizando técnicas de mineração de dados e Processamento de Linguagem Natural, com apoio de bibliotecas como spaCy, NLTK e Sentence Transformers, baseada no algoritmo GistSumm descrito na tese <a href="https://doi.org/10.22456/2175-2745.47524">Comparativo entre o algoritmo de Luhn e o algoritmo GistSumm para sumarização de Documentos (Muller, Granatyr, Lessing, 2015)</a>. Além disso, a ferramenta gera uma nuvem de palavras a partir do resumo produzido.
+</p>
+
+<h3>Funcionalidades</h3>
+
+- Sumarização automática de arquivos PDF e conteúdo de páginas web via URL
+- Geração de nuvem de palavras 
+- Processamento assíncrono em segundo plano, sem bloquear a navegação do usuário
+- Atualização em tempo real do status do processamento via Server-Sent Events (SSE)
+
+<h2 id="tech">Tecnologias</h2>
+
+**Backend**
+- Django
+
+**Processamento de Linguagem Natural**
+- spaCy
+- NLTK
+- Sentence Transformers
+- scikit-learn
+
+**Extração de conteúdo**
+- PyMuPDF (fitz) — extração de texto de arquivos PDF
+- BeautifulSoup4 — extração de conteúdo de páginas web
+
+**Dados e visualização**
+- NumPy
+- WordCloud
+
+**Frontend**
+- JavaScript
